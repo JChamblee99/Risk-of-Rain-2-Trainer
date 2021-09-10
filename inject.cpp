@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <tlhelp32.h>
+#include <cstdio>
 
 int getProcId(const char* target) {
 	DWORD pID = 0;
@@ -18,8 +19,9 @@ int getProcId(const char* target) {
 }
 
 int main(int argc, char* argv[]) {
-	const char* process = "example.exe";		// Name of the process to inject into
+	const char* process = "Risk of Rain 2.exe";	// Name of the process to inject into
 	int pID = getProcId(process);
+	printf("%d", pID);
 
 	char dll[] = "dllmain.dll";			// Name of the dll file to inject
 	char dllPath[MAX_PATH] = { 0 };
