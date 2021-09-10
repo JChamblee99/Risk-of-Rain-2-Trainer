@@ -5,10 +5,10 @@ CFLAGS = -I $(IDIR)
 all: clean dllmain.dll inject.exe
 
 inject.exe: inject.cpp dllmain.dll
-	$(CC) $(CFLAGS) -o inject.exe $^
+	$(CC) $(CFLAGS) -o inject.exe $<
 
 dllmain.dll: dllmain.cpp
-	$(CC) $(CFLAGS) -shared -o dllmain.dll $^
+	$(CC) $(CFLAGS) -shared -o dllmain.dll $<
 
 clean:
 	$(RM) *.dll *.exe
