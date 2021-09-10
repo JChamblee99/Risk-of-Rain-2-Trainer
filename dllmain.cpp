@@ -6,7 +6,7 @@ bool init = false;
 
 struct memory_ptr {
 	char* moduleName;
-	DWORD moduleOffset;
+	uintptr_t moduleOffset;
 	int offsetCount;
 	uintptr_t offsets[];
 };
