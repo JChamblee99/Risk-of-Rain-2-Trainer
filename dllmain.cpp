@@ -80,7 +80,7 @@ struct player_inventory {
 
 player_inventory* playerInventory;
 
-uintptr_t GetDynamicPtr(HANDLE hProc, memory_ptr* ptr) {
+void* GetDynamicPtr(HANDLE hProc, memory_ptr* ptr) {
 	uintptr_t moduleBaseAddr = (uintptr_t)GetModuleHandle(ptr->moduleName);
 	uintptr_t dynPtrBaseAddr = moduleBaseAddr + ptr->moduleOffset;
 
@@ -90,20 +90,20 @@ uintptr_t GetDynamicPtr(HANDLE hProc, memory_ptr* ptr) {
 		ReadProcessMemory(hProc, (void*)dynPtr, &dynPtr, sizeof(dynPtr), 0);
 		dynPtr += ptr->offsets[i];
 	}
-	return dynPtr;
+	return (void*)dynPtr;
 }
 
 void InitPointers() {
 	int pID = GetCurrentProcessId();
 	HANDLE procHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pID);
 
-	uintptr_t* localPlayerDynPtr = (uintptr_t*)GetDynamicPtr(procHandle, &localPlayerPtr);
+	void* localPlayerDynPtr = GetDynamicPtr(procHandle, &localPlayerPtr);
 	localPlayer = (local_player*)localPlayerDynPtr;
 
-	uintptr_t* playerStatsDynPtr = (uintptr_t*)GetDynamicPtr(procHandle, &playerStatsPtr);
+	void* playerStatsDynPtr = GetDynamicPtr(procHandle, &playerStatsPtr);
 	playerStats = (player_stats*)playerStatsDynPtr;
 
-	uintptr_t* playerInventoryDynPtr = (uintptr_t*)GetDynamicPtr(procHandle, &playerInventoryPtr);
+	void* playerInventoryDynPtr = GetDynamicPtr(procHandle, &playerInventoryPtr);
 	playerInventory = (player_inventory*)playerInventoryDynPtr;
 
 	init = true;
