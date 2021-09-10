@@ -97,14 +97,9 @@ void InitPointers() {
 	int pID = GetCurrentProcessId();
 	HANDLE procHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, pID);
 
-	void* localPlayerDynPtr = GetDynamicPtr(procHandle, &localPlayerPtr);
-	localPlayer = (local_player*)localPlayerDynPtr;
-
-	void* playerStatsDynPtr = GetDynamicPtr(procHandle, &playerStatsPtr);
-	playerStats = (player_stats*)playerStatsDynPtr;
-
-	void* playerInventoryDynPtr = GetDynamicPtr(procHandle, &playerInventoryPtr);
-	playerInventory = (player_inventory*)playerInventoryDynPtr;
+	localPlayer = (local_player*)GetDynamicPtr(procHandle, &localPlayerPtr);
+	playerStats = (player_stats*)GetDynamicPtr(procHandle, &playerStatsPtr);
+	playerInventory = (player_inventory*)GetDynamicPtr(procHandle, &playerInventoryPtr);
 
 	init = true;
 }
