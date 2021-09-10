@@ -109,10 +109,13 @@ DWORD WINAPI MainThread(LPVOID param) {
 
 	while (true) {
 		if (GetAsyncKeyState(VK_F6) & 0x80000) {		// F6: Add 10 lunar coins
+			InitPointers();
 			localPlayer->lunarCoins += 10;
 		} else if (GetAsyncKeyState(VK_F5) & 0x80000) {		// F5: Give 16 of every item
+			InitPointers();
 			for (int i = 0; i < 130; ++i) playerInventory->items[i] = 16;
 		} else if (GetAsyncKeyState(VK_F4) & 0x80000) {		// F4: Set max base stats
+			InitPointers();
 			memcpy(playerStats, &powerPlayerStats, sizeof(player_stats));
 		}
 		Sleep(100);
