@@ -2,8 +2,6 @@
 #include <tlhelp32.h>
 #include <cfloat>
 
-bool init = false;
-
 struct memory_ptr {
 	char* moduleName;
 	uintptr_t moduleOffset;
@@ -100,8 +98,6 @@ void InitPointers() {
 	localPlayer = (local_player*)GetDynamicPtr(procHandle, &localPlayerPtr);
 	playerStats = (player_stats*)GetDynamicPtr(procHandle, &playerStatsPtr);
 	playerInventory = (player_inventory*)GetDynamicPtr(procHandle, &playerInventoryPtr);
-
-	init = true;
 }
 
 DWORD WINAPI MainThread(LPVOID param) {
