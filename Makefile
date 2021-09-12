@@ -1,5 +1,5 @@
 IDIR = /usr/share/mingw-w64/include/
-CC = x86_64-w64-mingw32-gcc
+CC = x86_64-w64-mingw32-g++
 CFLAGS = -I $(IDIR)
 
 all: clean dllmain.dll inject.exe
